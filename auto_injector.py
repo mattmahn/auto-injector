@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Automatically renames CCDC inject PDFs based on their content"""
 
 import glob
 import os
@@ -22,13 +23,13 @@ TEMP_DIR = tempfile.mkdtemp(prefix='auto-injector-')
 
 
 def clean_tmp_dir():
-    """Deletes the temporary working directory and all files in it."""
+    """Delete the temporary working directory and all files in it."""
     shutil.rmtree(TEMP_DIR)
 
 
 def pdf_to_text(pdf_glob: str) -> Dict[str, str]:
     """
-    Converts the PDF files specified by pdf_glob and returns a dictionary
+    Convert the PDF files specified by ``pdf_glob`` and returns a dictionary
     mapping the PDF filename to the text file output.
     """
     txt_files = dict()
@@ -40,7 +41,7 @@ def pdf_to_text(pdf_glob: str) -> Dict[str, str]:
 
 
 def rename_pdfs(txt_files: Dict[str, str]):
-    """Renames the original PDF files to their new name."""
+    """Rename the original PDF files to their new name."""
     for pdf, txt in txt_files.items():
         with open(txt, 'r') as txt_file:
             content = txt_file.read()
@@ -53,7 +54,7 @@ def rename_pdfs(txt_files: Dict[str, str]):
 
 
 def get_sibling_path(path: str, filename: str) -> str:
-    """Return a path to filename that is a sibling of path."""
+    """Return a path to filename that is a sibling of ``path``."""
     return os.path.join(os.path.dirname(path), filename)
 
 
