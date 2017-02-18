@@ -8,7 +8,7 @@ file.
 ## Usage
 
 ```sh
-./auto-injector 'path/with/glob/to/*.pdf'
+./auto-injector.py 'path/with/glob/to/*.pdf'
 ```
 
 
