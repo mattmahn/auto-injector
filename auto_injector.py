@@ -49,7 +49,12 @@ def rename_pdfs(txt_files: Dict[str, str]):
         new_filename = '{num:03d} {subj}.pdf'.format(
             num=number, subj=subject)
         new_filename = FILENAME_BLACKLIST_RE.sub('_', new_filename)
-        os.replace(pdf, new_filename)
+        os.replace(pdf, get_sibling_path(pdf, new_filename))
+
+
+def get_sibling_path(path: str, filename: str) -> str:
+    """Return a path to filename that is a sibling of path."""
+    return os.path.join(os.path.dirname(path), filename)
 
 
 if __name__ == '__main__':
