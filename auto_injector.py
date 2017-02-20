@@ -11,8 +11,8 @@ import tempfile
 from typing import Dict
 
 INJECT_COMPETITON_RE = re.compile(r'Competition:\s+(.+)')
-INJECT_DURATION_RE = re.compile(r'Duration:\s+(\d+)')
-INJECT_DURATION_UNIT_RE = re.compile(r'Duration:\s+\d+\s+(\w+)')
+INJECT_DURATION_RE = re.compile(
+    r'Duration:\s+(?P<time>(?P<duration>\w+)\s+(?P<unit>.+))')
 INJECT_FROM_RE = re.compile(r'From:\s+(.+)')
 INJECT_NUM_RE = re.compile(r'Inject Number:\s+(\d+)')
 INJECT_SUBJECT_RE = re.compile(r'Subject:\s+(.+)')
@@ -49,12 +49,12 @@ def rename_pdfs(txt_files: Dict[str, str]):
             subject = INJECT_SUBJECT_RE.search(content)[1]
         new_filename = '{num:03d} {subj}.pdf'.format(
             num=number, subj=subject)
-        new_filename = FILENAME_BLACKLIST_RE.sub('_', new_filename)
+        new_filename = FILENAME_BLACKLIST_RE.sub('', new_filename)
         os.replace(pdf, get_sibling_path(pdf, new_filename))
 
 
 def get_sibling_path(path: str, filename: str) -> str:
-    """Return a path to filename that is a sibling of ``path``."""
+    """Return a path to ``filename`` that is a sibling of ``path``."""
     return os.path.join(os.path.dirname(path), filename)
 
 
