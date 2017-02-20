@@ -12,7 +12,7 @@ from typing import Dict
 
 INJECT_COMPETITON_RE = re.compile(r'Competition:\s+(.+)')
 INJECT_DURATION_RE = re.compile(
-    r'Duration:\s+(?P<time>(?P<duration>\w+)\s+(?P<unit>.+))')
+    r'Duration:\s+(?P<time>(?P<duration>\d+)\s+(?P<unit>.+))')
 INJECT_FROM_RE = re.compile(r'From:\s+(.+)')
 INJECT_NUM_RE = re.compile(r'Inject Number:\s+(\d+)')
 INJECT_SUBJECT_RE = re.compile(r'Subject:\s+(.+)')
